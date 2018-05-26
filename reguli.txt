@@ -1,0 +1,24 @@
+[Scop] {vehicul}.
+
+{
+Nr_reg~1
+daca(sanatos << mic)
+daca(\+buget << mic)
+concluzie(vehicul = trotineta [fc 90])
+}.
+
+{
+Nr_reg~2
+daca(tanar)
+concluzie(vehicul = trotineta [fc 100])
+}.
+
+[?]{
+%intrebare = ['Cum este sanatatea dumneavoastra?' / (slaba ^ ok ^ buna)]
+%atribut_intrebare::= sanatos
+}.
+
+[?]{
+%intrebare = ['Esti tanar?' / (da ^ nu)]
+%atribut_intrebare::= tanar
+}.

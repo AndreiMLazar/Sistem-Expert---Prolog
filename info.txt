@@ -1,0 +1,10 @@
+﻿vehicul<trotineta> 
+descriere<'Trotineta este o platforma mica cu doua sau mai multe roti, dirijata cu ajutorul unui ghidon si propulsata de cel care o conduce prin impingerea cu piciorul a pamantului.'>
+pasi:
+(1)<'Asezati-va pe platforma si puneti mainile pe ghidon.'>
+(2)<'Propulsati-va cu unul dintre picioare.'>
+imagine<'imagini/trotineta.jpg'>
+*****
+
+
+
