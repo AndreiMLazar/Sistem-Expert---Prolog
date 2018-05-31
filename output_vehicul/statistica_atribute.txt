@@ -1,0 +1,5 @@
+atlet.   6.
+fumator.   6.
+buget.   5.
+varsta.   5.
+

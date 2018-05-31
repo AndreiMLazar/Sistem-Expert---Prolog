@@ -9,14 +9,9 @@ concluzie(conditie_fizica = da [fc 80])
 
 {
 Nr_reg~2
-daca(varsta << 0-20)
-concluzie(vehicul = trotineta [fc 50])
-}.
-
-{
-Nr_reg~3
-daca(buget << mic)
 daca(conditie_fizica)
+daca(buget << mic)
+daca(varsta << copil)
 concluzie(vehicul = trotineta [fc 90])
 }.
 
@@ -33,4 +28,9 @@ concluzie(vehicul = trotineta [fc 90])
 [?]{
 %intrebare = ['Care este bugetul dumneavoastra?' / (mic ^ mediu ^ mare)]
 %atribut_intrebare::= buget
+}.
+
+[?]{
+%intrebare = ['In ce categorie va aflati?' / (copil ^ adult ^ batran)]
+%atribut_intrebare::= varsta
 }.

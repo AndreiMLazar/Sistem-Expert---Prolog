@@ -23,7 +23,7 @@ scrie_lista([]):-nl.
 scrie_lista([H|T]) :-
 write(H), tab(1),
 scrie_lista(T).
-             
+
 afiseaza_fapte :-
 write('Fapte existente în baza de cunostinte:'),
 nl,nl, write(' (Atribut,valoare) '), nl,nl,
@@ -48,7 +48,7 @@ lista_float_int(Reguli,Reguli1).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 un_pas(Rasp,OptiuniUrm,MesajUrm):-scop(Atr),(Rasp \== null,intreaba_acum(Rasp) ; true),
-								determina1(Atr,OptiuniUrm,MesajUrm), afiseaza_scop(Atr).
+determina1(Atr,OptiuniUrm,MesajUrm), afiseaza_scop(Atr).
 
 intreaba_acum(Rasp):-intrebare_curenta(Atr,OptiuniV,MesajV),interogheaza1(Rasp,Atr,MesajV,OptiuniV,Istorie),nl,
 asserta( interogat(av(Atr,_)) ).
@@ -224,8 +224,8 @@ citeste_fis_r(Fisin):-
 seeing(Input_curent),
 see(Fisin),
 repeat,
-    read(X),
-	((X==end_of_file)->(true);(read(Y),assert(statistica(X,Y)),fail)),
+read(X),
+((X==end_of_file)->(true);(read(Y),assert(statistica(X,Y)),fail)),
 !,
 seen,
 see(Input_curent).
@@ -288,8 +288,8 @@ afiseaza_pasi :-
 scop(Atr),
 (fapt(av(Atr,Val),FC,_),
 atom_concat('Solutie: ', Val, R1),
-    number_codes(FC,ListNr),
-	atom_codes(Atom,ListNr),
+number_codes(FC,ListNr),
+atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
 nl, write(R3), nl,nl,nl,	
@@ -302,9 +302,9 @@ fail ; true)
 afiseaza_descriere :- 
 scop(Atr),
 (fapt(av(Atr,Val),FC,_),
-	atom_concat('Solutie: ', Val, R1),
-    number_codes(FC,ListNr),
-	atom_codes(Atom,ListNr),
+atom_concat('Solutie: ', Val, R1),
+number_codes(FC,ListNr),
+atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
 nl, write(R3), nl,nl,nl,
@@ -317,9 +317,9 @@ fail ; true)
 afiseaza_ambele :- 
 scop(Atr),
 (fapt(av(Atr,Val),FC,_),
-	atom_concat('Solutie: ', Val, R1),
-    number_codes(FC,ListNr),
-	atom_codes(Atom,ListNr),
+atom_concat('Solutie: ', Val, R1),
+number_codes(FC,ListNr),
+atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
 nl, write(R3), nl,nl,nl,
@@ -332,12 +332,12 @@ fail ; true)
 
 listeaza_pasi([],Num).
 listeaza_pasi([H|T],Num):- Num1 is Num + 1, 
-                           number_codes(Num1,ListNr),
-                           atom_codes(Atom,ListNr),
-                           atom_concat(Atom, '.<', R1),
-                           atom_concat(R1,H,R2),
-                           atom_concat(R2,'>', Pas),
-                           write(Pas), nl, listeaza_pasi(T,Num1).
+number_codes(Num1,ListNr),
+atom_codes(Atom,ListNr),
+atom_concat(Atom, '.<', R1),
+atom_concat(R1,H,R2),
+atom_concat(R2,'>', Pas),
+write(Pas), nl, listeaza_pasi(T,Num1).
 
 scopuri_princ :-
 scop(Atr),determina(Atr), afiseaza_scop(Atr), info_vehicul(Atr,Desc,Pasi,Img),fail.
@@ -402,6 +402,7 @@ scrie_scop_lista_detalii([H|T]):-
 scrie_scop_lista_detalii(T), scrie_scop_detalii(H).
 scrie_scop_lista_detalii([]).
 
+%am modificat scrie scop pentru primi un predicat de tip fapt;
 %am adaugat verificarea FC >= 60 in scriere, deoarece am modificat 
 %modul in care luam toate faptele
 scrie_scop(fapt(av(Atr,Val),FC,_)) :-
@@ -434,7 +435,7 @@ pot_interoga(Scop,Istorie),
 !,realizare_scop(Scop,FC,Istorie).
 realizare_scop(Scop,FC_curent,Istorie) :-
 fg(Scop,FC_curent,Istorie).
-        
+
 fg(Scop,FC_curent,Istorie) :-
 regula(N, premise(Lista), concluzie(Scop,FC)),
 demonstreaza(N,Lista,FC_premise,Istorie),
@@ -518,12 +519,12 @@ transformare(av(A,V),[A,este,V]).
 premisele(N) :-
 regula(N, premise(Lista_premise), _),
 !, cum_premise(Lista_premise).
-        
+
 cum_premise([]).
 cum_premise([Scop|X]) :-
 cum(Scop),
 cum_premise(X).
-        
+
 %atribut care pune intrebarea		
 interogheaza(Atr,Mesaj,[da,nu],Istorie) :-
 !,write(Mesaj),nl, write('da,nu,nu_stiu,nu_conteaza'),
@@ -579,7 +580,7 @@ det_val_fc([nu,fc,FC],da,NFC) :- NFC is -FC.
 det_val_fc([Val,FC],Val,FC).
 det_val_fc([Val,fc,FC],Val,FC).
 det_val_fc([Val],Val,100).
-        
+
 afis_istorie([]) :- nl.
 afis_istorie([scop(X)|T]) :-
 scrie_lista([scop,X]),!,
@@ -596,7 +597,7 @@ realizare_scop(H,FC,Istorie),
 Val_interm is min(Val_actuala,FC),
 Val_interm >= 20,
 dem(T,Val_interm,Val_finala,Istorie).
- 
+
 actualizeaza(Scop,FC_nou,FC,RegulaN) :-
 fapt(Scop,FC_vechi,_),
 combina(FC_nou,FC_vechi,FC),
@@ -627,7 +628,7 @@ FC is round(X).
 incarca :-
 write('Introduceti numele fisierului cu reguli. '),nl, write('|:'),read(F),
 file_exists(F),!,incarca(F).
-incarca:-write('Nume incorect de fisier! '),nl,fail.
+incarca:-write('Numele fisierului este incorect! '),nl,fail.
 
 incarca_info_vehicule :-
 write('Introduceti numele fisierului cu informatii. '),nl, write('|:'),read(F),
@@ -668,12 +669,12 @@ repeat,citeste_descriere(L),
 proceseaza(L),L == [end_of_file],nl.
 
 citeste_descriere(L):- citeste_linie(Linie), 
-                      % write(Linie), nl, nl,
-					(
-					   Linie = [end_of_file], ! , L = [end_of_file] ;
-					   Linie =[H|_], H = '*', ! , L = [] ;
-					   citeste_descriere(T1), append(Linie, T1, L)
-					).
+% write(Linie), nl, nl,
+(
+Linie = [end_of_file], ! , L = [end_of_file] ;
+Linie =[H|_], H = '*', ! , L = [] ;
+citeste_descriere(T1), append(Linie, T1, L)
+).
 
 proceseaza([end_of_file]):-!.
 proceseaza(L) :-
@@ -716,13 +717,13 @@ propoz(av(Atr,da)) --> [Atr].
 
 lista_pasi(Pasi) --> [pasi,':'], lista_de_pasi(Pasi).
 
-    lista_de_pasi([Element]) -->  
-    ['(',Nr,')','<',Element,'>',imagine,'<']
-    .
+lista_de_pasi([Element]) -->  
+['(',Nr,')','<',Element,'>',imagine,'<']
+.
 lista_de_pasi([Element|T]) -->
-    ['(',Nr,')','<',Element,'>'],
-    lista_de_pasi(T)
-    .    
+['(',Nr,')','<',Element,'>'],
+lista_de_pasi(T)
+.    
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 % ~~~~ sfarsit parsare b) ~~~~
 
@@ -731,7 +732,7 @@ citeste_linie([Cuv|Lista_cuv]) :-
 get_code(Car),
 citeste_cuvant(Car, Cuv, Car1), 
 rest_cuvinte_linie(Car1, Lista_cuv). 
-      
+
 % -1 este codul ASCII pt EOF
 
 rest_cuvinte_linie(-1, []):-!.    
@@ -743,7 +744,7 @@ rest_cuvinte_linie(Car1,Lista_cuv).
 citeste_propozitie([Cuv|Lista_cuv]) :-
 get_code(Car),citeste_cuvant(Car, Cuv, Car1), 
 rest_cuvinte_propozitie(Car1, Lista_cuv). 
-     
+
 rest_cuvinte_propozitie(-1, []):-!.    
 rest_cuvinte_propozitie(Car,[]) :-Car==46, !.
 rest_cuvinte_propozitie(Car,[Cuv1|Lista_cuv]) :-
