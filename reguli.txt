@@ -2,21 +2,35 @@
 
 {
 Nr_reg~1
-concluzie(vehicul = trotineta [fc 90])
+daca(atlet)
+daca(\+fumator)
+concluzie(conditie_fizica = da [fc 80])
 }.
 
 {
 Nr_reg~2
-daca(tanar)
-concluzie(vehicul = trotineta [fc 100])
+daca(varsta << 0-20)
+concluzie(vehicul = trotineta [fc 50])
+}.
+
+{
+Nr_reg~3
+daca(buget << mic)
+daca(conditie_fizica)
+concluzie(vehicul = trotineta [fc 90])
 }.
 
 [?]{
-%intrebare = ['Cum este sanatatea dumneavoastra?' / (slaba ^ ok ^ buna)]
-%atribut_intrebare::= sanatos
+%intrebare = ['Sunteti atlet?' / (da ^ nu)]
+%atribut_intrebare::= atlet
 }.
 
 [?]{
-%intrebare = ['Esti tanar?' / (da ^ nu)]
-%atribut_intrebare::= tanar
+%intrebare = ['Sunteti fumator?' / (da ^ nu)]
+%atribut_intrebare::= fumator
+}.
+
+[?]{
+%intrebare = ['Care este bugetul dumneavoastra?' / (mic ^ mediu ^ mare)]
+%atribut_intrebare::= buget
 }.
