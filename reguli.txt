@@ -2,8 +2,6 @@
 
 {
 Nr_reg~1
-daca(sanatos << mic)
-daca(\+buget << mic)
 concluzie(vehicul = trotineta [fc 90])
 }.
 

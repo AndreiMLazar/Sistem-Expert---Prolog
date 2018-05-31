@@ -1,4 +1,4 @@
-:-use_module(library(lists)).
+﻿:-use_module(library(lists)).
 :-use_module(library(system)).
 :-use_module(library(file_systems)).
 :-op(900,fy,not).
@@ -11,8 +11,8 @@
 :-dynamic statistica/2.
 
 % ~~~~  inceput b)  ~~~~
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-%predicat dinamic pentru parsarea fisierului informatii_tehnici.txt
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%predicat dinamic pentru parsarea fisierului info.txt
 %acesta va avea urmatorul format: info_vehicul(Nume_vehicul,Descriere,Pasi,Imagine).
 :-dynamic info_vehicul/4.
 
@@ -23,16 +23,16 @@ scrie_lista([]):-nl.
 scrie_lista([H|T]) :-
 write(H), tab(1),
 scrie_lista(T).
-
+             
 afiseaza_fapte :-
-write('Fapte existente in baza de cunostinte:'),
-nl,nl, write(' [Atribut,valoare] '), nl,nl,
+write('Fapte existente în baza de cunostinte:'),
+nl,nl, write(' (Atribut,valoare) '), nl,nl,
 listeaza_fapte,nl.
 
 listeaza_fapte:-  
 fapt(av(Atr,Val),FC,_), 
-write('['),write(Atr),write(','),
-write(Val), write(']'),
+write('('),write(Atr),write(','),
+write(Val), write(')'),
 write(','), write(' certitudine '),
 FC1 is integer(FC),write(FC1),
 nl,fail.
@@ -48,7 +48,7 @@ lista_float_int(Reguli,Reguli1).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 un_pas(Rasp,OptiuniUrm,MesajUrm):-scop(Atr),(Rasp \== null,intreaba_acum(Rasp) ; true),
-determina1(Atr,OptiuniUrm,MesajUrm), afiseaza_scop(Atr).
+								determina1(Atr,OptiuniUrm,MesajUrm), afiseaza_scop(Atr).
 
 intreaba_acum(Rasp):-intrebare_curenta(Atr,OptiuniV,MesajV),interogheaza1(Rasp,Atr,MesajV,OptiuniV,Istorie),nl,
 asserta( interogat(av(Atr,_)) ).
@@ -100,7 +100,7 @@ retractall(intrebare_curenta(_,_,_)),
 retractall(scop(_)),
 retractall(interogabil(_)),
 retractall(regula(_,_,_)),
-incarca('reguli.txt').
+incarca('sist_expert.txt').
 
 
 fg1(Scop,FC_curent,Istorie,OptiuniUrm,MesajUrm) :-
@@ -133,9 +133,9 @@ retractall(intrebare_curenta(_,_,_)),
 %pus la inceput ca sa existe baza de date cu statistica(X,Y) in momentul folosirii lui interogheaza
 creare_director,
 repeat,
-write('Introduceti una din urmatoarele optiuni: '),
+write('Introduceti o optiune de mai jos: '),
 nl,nl,
-write(' (Incarca  /  Consulta  /  Reinitiaza  /  Afisare_fapte  /  Cum  /  Iesire) '),
+write(' (Incarca / Consulta / Reinitiaza / Afisare_fapte / Cum / Iesire) '),
 nl,nl,write('|: '),citeste_linie([H|T]),
 executa([H|T]), H == iesire.
 
@@ -179,18 +179,18 @@ write('Comanda incorecta! '),nl.
 
 % ~~~~  e)  ~~~~
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %creaza directorul in care se salveaza fisierele cu statistica_atribute.txt si demonstratiile
 %directorul este format doar daca nu exista 
 creare_director:- ((\+directory_exists('output_vehicul'))->(make_directory('output_vehicul'));true).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %creaza fisierul cu statistica_atribute.txt
 %fisierul este format doar daca nu exista
 %o sa il apelam dupa incarca 
 creare_fisier_statistica:- ((\+file_exists('output_vehicul/statistica_atribute.txt'))->(fis_statistica);true).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %creaza fisierul 'statistica_atribute.txt' si initializeaza cu 0 numarul aparitiilor atributelor
 fis_statistica:-
 findall(st(Atr,0),( interogabil(Atr,_,_) ),L_st),
@@ -200,7 +200,7 @@ scrie_lista_st(L_st),
 told,
 tell(Vechi).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %actualizeaza fisierul statistica_atribute.txt
 actualizare_statistica:-
 findall(st(Atr,Nr),retract(statistica(Atr,Nr)),L_st),
@@ -210,22 +210,22 @@ scrie_lista_st(L_st),
 told,
 tell(Vechi).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %extrage datele din lista cu structurile st(Atr,Nr) si afiseaza Atr si Nr
 scrie_lista_st([]):-nl.
 scrie_lista_st([st(Atr,Nr)|T]) :-
 write(Atr), write('.'), tab(3), write(Nr), write('.'), nl,
 scrie_lista_st(T).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %citeste termen cu termen din fisier (cu redirectare)
 %citeste_fis_r(+Fisin)
 citeste_fis_r(Fisin):- 
 seeing(Input_curent),
 see(Fisin),
 repeat,
-read(X),
-((X==end_of_file)->(true);(read(Y),assert(statistica(X,Y)),fail)),
+    read(X),
+	((X==end_of_file)->(true);(read(Y),assert(statistica(X,Y)),fail)),
 !,
 seen,
 see(Input_curent).
@@ -235,7 +235,7 @@ see(Input_curent).
 
 % ~~~~  f)  ~~~~
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %contruieste numele fisierului demonstratie
 nume_fisier(NumeFisier,Val,FC) :-
 atom_concat('output_vehicul/demonstratie###',Val,Rez),
@@ -245,24 +245,24 @@ atom_chars(NR,N),
 atom_concat(Rez1,NR,Rez2),
 atom_concat(Rez2,'.txt',NumeFisier).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % sterge fisierele care incep cu 'demonstratie' din folderul output_vehicul
 stergere_demonstratii:-
 file_members_of_directory(output_vehicul,Lista_nume_fisiere),
 decupare_nume_fisier(Lista_nume_fisiere,Lista_decupata),
 parcurgere_lista(Lista_decupata).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % decupeaza din Lista_nume_fisiere, care contine BaseName-FullName, doar BaseName-FullName
 decupare_nume_fisier([A-_|T],[H_dec|T_dec]):- H_dec = A, decupare_nume_fisier(T,T_dec).
 decupare_nume_fisier([],[]).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %parcurge toata lista cu nume de fisiere
 parcurgere_lista([H|RestL]):- ((prefix_atom(demonstratie,H))->(atom_concat('output_vehicul/',H,H1),delete_file(H1));true), parcurgere_lista(RestL).
 parcurgere_lista([]).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %verifica daca numele fierului incepe cu Atom1 ( demonstratie )
 
 prefix_atom(Atom1,Atom2):-
@@ -271,7 +271,7 @@ atom_chars(Atom1,L1),
 atom_chars(Atom2,L2),
 append(L1,_,L2).
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %crearea fisierelor cu demostratii
 
 afiseaza_demonstratii :- 
@@ -288,69 +288,69 @@ afiseaza_pasi :-
 scop(Atr),
 (fapt(av(Atr,Val),FC,_),
 atom_concat('Solutie: ', Val, R1),
-number_codes(FC,ListNr),
-atom_codes(Atom,ListNr),
+    number_codes(FC,ListNr),
+	atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
 nl, write(R3), nl,nl,nl,	
 info_vehicul(Val,_,Pasi,_),
 listeaza_pasi(Pasi,0),
-nl, write('[~~~~~~~~~~~~~~~~~~~~~~~~]'),nl,
+nl, write('##########################'),nl,
 fail ; true)
 .
 
 afiseaza_descriere :- 
 scop(Atr),
 (fapt(av(Atr,Val),FC,_),
-atom_concat('Solutie: ', Val, R1),
-number_codes(FC,ListNr),
-atom_codes(Atom,ListNr),
+	atom_concat('Solutie: ', Val, R1),
+    number_codes(FC,ListNr),
+	atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
 nl, write(R3), nl,nl,nl,
 info_vehicul(Val,Desc,_,_),
 write(Desc),nl,
-nl, write('[~~~~~~~~~~~~~~~~~~~~~~~~]'),nl,
+nl, write('##########################'),nl,
 fail ; true)
 .
 
 afiseaza_ambele :- 
 scop(Atr),
 (fapt(av(Atr,Val),FC,_),
-atom_concat('Solutie: ', Val, R1),
-number_codes(FC,ListNr),
-atom_codes(Atom,ListNr),
+	atom_concat('Solutie: ', Val, R1),
+    number_codes(FC,ListNr),
+	atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
 nl, write(R3), nl,nl,nl,
 info_vehicul(Val,Desc,Pasi,_),
 write(Desc),nl,
 listeaza_pasi(Pasi,0),
-nl, write('[~~~~~~~~~~~~~~~~~~~~~~~~]'),nl,
+nl, write('##########################'),nl,
 fail ; true)
 .
 
 listeaza_pasi([],Num).
 listeaza_pasi([H|T],Num):- Num1 is Num + 1, 
-number_codes(Num1,ListNr),
-atom_codes(Atom,ListNr),
-atom_concat(Atom, '.<', R1),
-atom_concat(R1,H,R2),
-atom_concat(R2,'>', Pas),
-write(Pas), nl, listeaza_pasi(T,Num1).
+                           number_codes(Num1,ListNr),
+                           atom_codes(Atom,ListNr),
+                           atom_concat(Atom, '.<', R1),
+                           atom_concat(R1,H,R2),
+                           atom_concat(R2,'>', Pas),
+                           write(Pas), nl, listeaza_pasi(T,Num1).
 
 scopuri_princ :-
 scop(Atr),determina(Atr), afiseaza_scop(Atr), info_vehicul(Atr,Desc,Pasi,Img),fail.
 %apeleaza predicatul care scrie demonstatiile in fisiere
 scopuri_princ:- stergere_demonstratii, afiseaza_demonstratii, actualizare_statistica. 
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %intreaba_descriere 
 
 intreaba_descriere:- 
 repeat,
 nl,nl,
-write(' Afiseaza detalii? ( pasi / descriere / ambele / inapoi_meniu ) '),
+write(' Afiseaza detalii? (pasi / descriere / ambele / inapoi_meniu) '),
 nl,nl,write('|: '),citeste_linie([H|T]),
 executa([H|T]), H == inapoi_meniu.
 
@@ -402,7 +402,6 @@ scrie_scop_lista_detalii([H|T]):-
 scrie_scop_lista_detalii(T), scrie_scop_detalii(H).
 scrie_scop_lista_detalii([]).
 
-%am modificat scrie scop pentru primi un predicat de tip fapt;
 %am adaugat verificarea FC >= 60 in scriere, deoarece am modificat 
 %modul in care luam toate faptele
 scrie_scop(fapt(av(Atr,Val),FC,_)) :-
@@ -435,7 +434,7 @@ pot_interoga(Scop,Istorie),
 !,realizare_scop(Scop,FC,Istorie).
 realizare_scop(Scop,FC_curent,Istorie) :-
 fg(Scop,FC_curent,Istorie).
-
+        
 fg(Scop,FC_curent,Istorie) :-
 regula(N, premise(Lista), concluzie(Scop,FC)),
 demonstreaza(N,Lista,FC_premise,Istorie),
@@ -519,12 +518,12 @@ transformare(av(A,V),[A,este,V]).
 premisele(N) :-
 regula(N, premise(Lista_premise), _),
 !, cum_premise(Lista_premise).
-
+        
 cum_premise([]).
 cum_premise([Scop|X]) :-
 cum(Scop),
 cum_premise(X).
-
+        
 %atribut care pune intrebarea		
 interogheaza(Atr,Mesaj,[da,nu],Istorie) :-
 !,write(Mesaj),nl, write('da,nu,nu_stiu,nu_conteaza'),
@@ -580,7 +579,7 @@ det_val_fc([nu,fc,FC],da,NFC) :- NFC is -FC.
 det_val_fc([Val,FC],Val,FC).
 det_val_fc([Val,fc,FC],Val,FC).
 det_val_fc([Val],Val,100).
-
+        
 afis_istorie([]) :- nl.
 afis_istorie([scop(X)|T]) :-
 scrie_lista([scop,X]),!,
@@ -597,7 +596,7 @@ realizare_scop(H,FC,Istorie),
 Val_interm is min(Val_actuala,FC),
 Val_interm >= 20,
 dem(T,Val_interm,Val_finala,Istorie).
-
+ 
 actualizeaza(Scop,FC_nou,FC,RegulaN) :-
 fapt(Scop,FC_vechi,_),
 combina(FC_nou,FC_vechi,FC),
@@ -626,16 +625,16 @@ X is 100 * (FC1 + FC2) / (100 - MFC),
 FC is round(X).
 
 incarca :-
-write('Introduceti numele fisierului care doriti sa fie incarcat: '),nl, write('|:'),read(F),
+write('Introduceti numele fisierului cu reguli. '),nl, write('|:'),read(F),
 file_exists(F),!,incarca(F).
 incarca:-write('Nume incorect de fisier! '),nl,fail.
 
 incarca_info_vehicule :-
-write('Introduceti numele fisierului cu informatii pe care doriti sa-l incarcati: '),nl, write('|:'),read(F),
+write('Introduceti numele fisierului cu informatii. '),nl, write('|:'),read(F),
 file_exists(F),!,incarca_info_vehicule(F).
-incarca_info_vehicule:-write('Nume incorect de fisier! '),nl,fail.
+incarca_info_vehicule:-write('Numele fisierului este incorect! '),nl,fail.
 
-file_exists('informatii.txt'),!,incarca_info_vehicule('informatii.txt').
+%file_exists('info.txt'),!,incarca_info_vehicule('info.txt').
 
 incarca(F) :-
 retractall(interogat(_)),retractall(fapt(_,_,_)),
@@ -648,10 +647,10 @@ repeat,citeste_propozitie(L),
 proceseaza(L),L == [end_of_file],nl.
 
 % ~~~~ parsare b)  ~~~~
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %realizam parsarea pentru fisierul care contine informatiile despre vehicule
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % incarca_info_vehicule(+NumeFisierCuInformatii)
 % stergem toate predicatele dinamice de forma info_vehicul, deschidem fisierul pt citire, apelam incarca_info, inchidem fisierul pt citire
 
@@ -659,7 +658,7 @@ incarca_info_vehicule(F) :-
 retractall(info_vehicul(_,_,_,_)),
 see(F),incarca_info,seen,!.
 
-%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % incarca_info citeste propozitie cu propozitie fisierul
 % info_vehicul(Nume_vehicul,Descriere,Pasi,Imagine).
 % atom_concat(+Atom1,+Atom2,-AtomiConcatenati).
@@ -669,12 +668,12 @@ repeat,citeste_descriere(L),
 proceseaza(L),L == [end_of_file],nl.
 
 citeste_descriere(L):- citeste_linie(Linie), 
-% write(Linie), nl, nl,
-(
-Linie = [end_of_file], ! , L = [end_of_file] ;
-Linie =[H|_], H = '*', ! , L = [] ;
-citeste_descriere(T1), append(Linie, T1, L)
-).
+                      % write(Linie), nl, nl,
+					(
+					   Linie = [end_of_file], ! , L = [end_of_file] ;
+					   Linie =[H|_], H = '*', ! , L = [] ;
+					   citeste_descriere(T1), append(Linie, T1, L)
+					).
 
 proceseaza([end_of_file]):-!.
 proceseaza(L) :-
@@ -688,7 +687,7 @@ trad(interogabil(Atr,M,P)) -->
 trad(regula(N,premise(Daca),concluzie(Atunci,F))) --> identificator(N),daca(Daca),atunci(Atunci,F).
 
 trad(info_vehicul(Nume_vehicul,Descriere,Pasi,Imagine)) --> 
-[vehicul,'<',Nume_vehicul,'>',descriere,'<',Descriere,'>'],
+[vehicul, ':','<',Nume_vehicul,'>',descriere,'<',Descriere,'>'],
 lista_pasi(Pasi),
 [Imagine,'>']
 .
@@ -717,13 +716,13 @@ propoz(av(Atr,da)) --> [Atr].
 
 lista_pasi(Pasi) --> [pasi,':'], lista_de_pasi(Pasi).
 
-lista_de_pasi([Element]) -->  
-['(',Nr,')','<',Element,'>',imagine,'<']
-.
+    lista_de_pasi([Element]) -->  
+    ['(',Nr,')','<',Element,'>',imagine,'<']
+    .
 lista_de_pasi([Element|T]) -->
-['(',Nr,')','<',Element,'>'],
-lista_de_pasi(T)
-.    
+    ['(',Nr,')','<',Element,'>'],
+    lista_de_pasi(T)
+    .    
 %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--
 % ~~~~ sfarsit parsare b) ~~~~
 
@@ -732,7 +731,7 @@ citeste_linie([Cuv|Lista_cuv]) :-
 get_code(Car),
 citeste_cuvant(Car, Cuv, Car1), 
 rest_cuvinte_linie(Car1, Lista_cuv). 
-
+      
 % -1 este codul ASCII pt EOF
 
 rest_cuvinte_linie(-1, []):-!.    
@@ -744,7 +743,7 @@ rest_cuvinte_linie(Car1,Lista_cuv).
 citeste_propozitie([Cuv|Lista_cuv]) :-
 get_code(Car),citeste_cuvant(Car, Cuv, Car1), 
 rest_cuvinte_propozitie(Car1, Lista_cuv). 
-
+     
 rest_cuvinte_propozitie(-1, []):-!.    
 rest_cuvinte_propozitie(Car,[]) :-Car==46, !.
 rest_cuvinte_propozitie(Car,[Cuv1|Lista_cuv]) :-
