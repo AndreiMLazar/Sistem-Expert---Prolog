@@ -1,5 +1,14 @@
-atlet.   6.
-fumator.   6.
-buget.   5.
-varsta.   5.
+a_mai_folosit.   4.
+miscare.   1.
+echilibru.   1.
+timp_liber.   1.
+priceput.   1.
+buget.   1.
+adult.   3.
+mod_rulare.   1.
+sanatos.   1.
+gafait.   1.
+durere_articulatii.   1.
+ore_sport.   1.
+forta_fizica.   1.
 

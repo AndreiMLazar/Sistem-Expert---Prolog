@@ -307,7 +307,7 @@ number_codes(FC,ListNr),
 atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
-nl, write(R3), nl,nl,nl,
+nl, write(R3), nl,nl,
 info_vehicul(Val,Desc,_,_),
 write(Desc),nl,
 nl, write('##########################'),nl,
@@ -322,7 +322,7 @@ number_codes(FC,ListNr),
 atom_codes(Atom,ListNr),
 atom_concat(R1, '  FC:', R2),
 atom_concat(R2, Atom, R3),
-nl, write(R3), nl,nl,nl,
+nl, write(R3), nl,nl,
 info_vehicul(Val,Desc,Pasi,_),
 write(Desc),nl,
 listeaza_pasi(Pasi,0),
@@ -475,23 +475,25 @@ afis_reguli([N|X]) :-
 afis_regula(N),
 premisele(N),
 afis_reguli(X).
+
 afis_regula(N) :-
 regula(N, premise(Lista_premise),
 concluzie(Scop,FC)),NN is integer(N),
-scrie_lista(['{\nNr_reg~',NN]),
-scrie_lista_premise(Lista_premise),
-write('concluzie('),
+scrie_lista(['\nR -->',NN]),
+write('{'),
 transformare3(Scop,Scop_tr),
 FC1 is integer(FC),
-append([' [fc '],[FC1],FC2),append(Scop_tr,FC2,LL),append(LL,[']'],LLL),
-scrie_lista2(LL),write('])\n}.'),nl.
+append([' :: fact_cert ^ '],[FC1],FC2),append(Scop_tr,FC2,LL),append(LL,[' '],LLL),
+scrie_lista2(LL),
+write('\npremise ^\n\t{\n'),
+scrie_lista_premise(Lista_premise),
+write('\t}\n}.'),nl.
 
 scrie_lista_premise([]).
 scrie_lista_premise([H|T]) :-
-write('daca('),
 transformare2(H,H_tr),
 scrie_lista2(H_tr), 
-scrie_lista([')']),
+scrie_lista(['']),
 scrie_lista_premise(T).
 
 scrie_lista2([]).
@@ -500,14 +502,14 @@ write(H),
 scrie_lista2(T).
 
 transformare3(av(A,da),[A]) :- !.
-transformare3(not av(A,da), ['\\+',A]) :- !.
-transformare3(av(A,nu),['\\+',A]) :- !.
-transformare3(av(A,V),[A,' = ',V]).
+transformare3(not av(A,da), ['\t',A]) :- !.
+transformare3(av(A,nu),['\t',A]) :- !.
+transformare3(av(A,V),[A,' ^ ',V]).
 
 transformare2(av(A,da),[A]) :- !.
-transformare2(not av(A,da), ['\\+',A]) :- !.
-transformare2(av(A,nu),['\\+',A]) :- !.
-transformare2(av(A,V),[A,' << ',V]).
+transformare2(not av(A,da), ['\t',A]) :- !.
+transformare2(av(A,nu),['\t',A]) :- !.
+transformare2(av(A,V),[A,' :==: ',V]).
 
 transformare(av(A,da),[A]) :- !.
 transformare(not av(A,da), [not,A]) :- !.
@@ -527,7 +529,7 @@ cum_premise(X).
 
 %atribut care pune intrebarea		
 interogheaza(Atr,Mesaj,[da,nu],Istorie) :-
-!,write(Mesaj),nl, write('da,nu,nu_stiu,nu_conteaza'),
+!,write(Mesaj),nl, write('da, nu, nu_stiu, nu_conteaza'),
 % primea rasp utilizatorului si verifica lista de optiuni
 de_la_utiliz(X,Istorie,[da,nu,nu_stiu,nu_conteaza]), 
 det_val_fc(X,Val,FC),
@@ -680,10 +682,10 @@ proceseaza([end_of_file]):-!.
 proceseaza(L) :-
 trad(R,L,[]),assertz(R), !.
 
-trad(scop(X)) --> ['[',scop,']','{',X,'}'].
+trad(scop(X)) --> [scop,'^',X].
 
 trad(interogabil(Atr,M,P)) --> 
-['[','?',']','{','%',intrebare,'=','['], afiseaza(Atr,P), lista_optiuni(M),['%',atribut_intrebare,':',':','=', Atr, '}'].
+[intrebare,'>',Atr], ['text','^'], afiseaza(Atr,P), lista_optiuni(M), ['}'].
 
 trad(regula(N,premise(Daca),concluzie(Atunci,F))) --> identificator(N),daca(Daca),atunci(Atunci,F).
 
@@ -695,24 +697,24 @@ lista_pasi(Pasi),
 
 trad('Eroare la parsare'-L,L,_).
 
-lista_optiuni(M) --> ['('],lista_de_optiuni(M).
-lista_de_optiuni([Element]) -->  [Element,')',']'].
+lista_optiuni(M) --> ['opt'],['{'],lista_de_optiuni(M).
+lista_de_optiuni([Element]) -->  [Element,'}'].
 lista_de_optiuni([Element|T]) --> [Element,'^'],lista_de_optiuni(T).
 
-afiseaza(_,P) -->  [P,'/'].
+afiseaza(_,P) -->  [P].
 afiseaza(P,P) -->  [].
-identificator(N) --> ['{',nr_reg,'~',N].  %regula
+identificator(N) --> [R,'>',N].  %regula
 
-daca(Daca) --> [daca,'('],lista_premise(Daca).
+daca(Daca) --> lista_premise(Daca).
 
-lista_premise([Daca]) --> propoz(Daca),[')',concluzie,'('].
-lista_premise([Prima|Celalalte]) --> propoz(Prima),[')',daca,'('],lista_premise(Celalalte). % modificat
+lista_premise([Daca]) --> propoz(Daca).
+lista_premise([Prima|Celalalte]) --> propoz(Prima),lista_premise(Celalalte). % modificat
 
-atunci(av(Atr,Val),FC) --> [Atr,'=',Val,'[',fc, FC,']',')','}'].
-atunci(av(Atr,Val),100) --> [Atr,'=',Val,')','}'].
+atunci(av(Atr,Val),FC) --> [Atr,'^',Val,':',':',fact_cert,'^',FC,'}'].
+atunci(av(Atr,Val),100) --> [Atr,'^',Val,'}'].
 
-propoz(not av(Atr,da)) --> ['\\','+',Atr].
-propoz(av(Atr,Val)) --> [Atr,'<','<',Val]. % am inlocuit este cu <<
+propoz(not av(Atr,da)) --> ['\\','\\',Atr].
+propoz(av(Atr,Val)) --> [Atr,':','=','=',':',Val].
 propoz(av(Atr,da)) --> [Atr].
 
 lista_pasi(Pasi) --> [pasi,':'], lista_de_pasi(Pasi).

@@ -1,36 +1,589 @@
-[Scop] {vehicul}.
+scop ^ vehicul.
 
-{
-Nr_reg~1
-daca(atlet)
-daca(\+fumator)
-concluzie(conditie_fizica = da [fc 80])
+R > 1
+experienta :==: mica
+dificultate :==: medie
+mentenanta :==: mica
+pret :==: redus
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ role :: fact_cert ^ 95
 }.
 
-{
-Nr_reg~2
-daca(conditie_fizica)
-daca(buget << mic)
-daca(varsta << copil)
-concluzie(vehicul = trotineta [fc 90])
+R > 2
+experienta :==: mica
+dificultate :==: medie
+mentenanta :==: medie
+pret :==: redus
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ trotineta :: fact_cert ^ 95
 }.
 
-[?]{
-%intrebare = ['Sunteti atlet?' / (da ^ nu)]
-%atribut_intrebare::= atlet
+R > 3
+experienta :==: medie
+dificultate :==: mare
+mentenanta :==: mica
+pret :==: redus
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ skateboard :: fact_cert ^ 95
 }.
 
-[?]{
-%intrebare = ['Sunteti fumator?' / (da ^ nu)]
-%atribut_intrebare::= fumator
+R > 4
+experienta :==: mare
+dificultate :==: medie
+mentenanta :==: medie
+pret :==: mare
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ longboard :: fact_cert ^ 95
 }.
 
-[?]{
-%intrebare = ['Care este bugetul dumneavoastra?' / (mic ^ mediu ^ mare)]
-%atribut_intrebare::= buget
+R > 5
+experienta :==: medie
+dificultate :==: mare
+mentenanta :==: mica
+pret :==: mediu
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ waveboard :: fact_cert ^ 95
 }.
 
-[?]{
-%intrebare = ['In ce categorie va aflati?' / (copil ^ adult ^ batran)]
-%atribut_intrebare::= varsta
+R > 6
+experienta :==: medie
+dificultate :==: mica
+mentenanta :==: mica
+pret :==: mediu
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ patine :: fact_cert ^ 95
+}.
+
+R > 7
+experienta :==: medie
+dificultate :==: mare
+mentenanta :==: medie
+pret :==: mare
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ hoverboard :: fact_cert ^ 95
+}.
+
+R > 8
+experienta :==: mare
+dificultate :==: mare
+mentenanta :==: medie
+pret :==: mare
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mic
+\\forta_fizica
+vehicul ^ segway_pe_o_roata:: fact_cert ^ 95
+}.
+
+R > 9
+experienta :==: mare
+dificultate :==: mare
+mentenanta :==: medie
+pret :==: mare
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mic
+\\forta_fizica
+vehicul ^ segway_pe_doua_roti:: fact_cert ^ 95
+}.
+
+R > 10
+experienta :==: mare
+dificultate :==: mare
+mentenanta :==: mica
+pret :==: redus
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mare
+forta_fizica
+vehicul ^ monociclu :: fact_cert ^  85
+}.
+
+R > 11
+experienta :==: mica
+dificultate :==: mica
+mentenanta :==: mica
+pret :==: mediu
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ bicicleta :: fact_cert ^ 95
+}.
+
+R > 12
+experienta :==: mica
+dificultate :==: mica
+mentenanta :==: medie
+pret :==: mediu
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mic
+forta_fizica
+vehicul ^ trotineta_cu_3_roti :: fact_cert ^  90
+}.
+
+R > 13
+experienta :==: medie
+dificultate :==: mare
+mentenanta :==: mica
+pret :==: redus
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mare
+forta_fizica
+vehicul ^ pogo_stick :: fact_cert ^ 80
+}.
+
+R > 14
+experienta :==: medie
+dificultate :==: medie
+mentenanta :==: mare
+pret :==: mediu
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ cart :: fact_cert ^ 95
+}.
+
+R > 15
+experienta :==: mica
+dificultate :==: mica
+mentenanta :==: mare
+pret :==: mare
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mic
+\\forta_fizica
+vehicul ^ masinuta_electrica :: fact_cert ^ 95
+}.
+
+R > 16
+a_mai_folosit
+miscare
+experienta ^ mare
+}.
+
+R > 17
+\\a_mai_folosit
+\\miscare
+experienta ^ mica
+}.
+
+R > 18
+a_mai_folosit
+\\miscare
+experienta ^ mare
+}.
+
+R > 19
+\\a_mai_folosit
+miscare
+experienta ^ mica
+}.
+
+R > 20
+a_mai_folosit
+echilibru :==: ok
+dificultate ^ medie
+}.
+
+R > 21
+a_mai_folosit
+echilibru :==: bun
+dificultate ^ mare
+}.
+
+R > 22
+a_mai_folosit
+echilibru :==: mic
+dificultate ^ mica
+}.
+
+R > 23
+\\a_mai_folosit
+echilibru :==: ok
+dificultate ^ medie
+}.
+
+R > 24
+\\a_mai_folosit
+echilibru :==: bun
+dificultate ^ medie
+}.
+
+R > 25
+\\a_mai_folosit
+echilibru :==: mic
+dificultate ^ mica
+}.
+
+R > 26
+timp_liber :==: mult
+priceput
+mentenanta ^ mare
+}.
+
+R > 27
+timp_liber :==: putin
+priceput
+mentenanta ^ medie
+}.
+
+R > 28
+timp_liber :==: deloc
+priceput
+mentenanta ^ mica
+}.
+
+R > 29
+timp_liber :==: mult
+\\priceput
+mentenanta ^ medie
+}.
+
+R > 30
+timp_liber :==: putin
+\\priceput
+mentenanta ^ mica
+}.
+
+R > 31
+timp_liber :==: deloc
+\\priceput
+mentenanta ^ mica
+}.
+
+R > 32
+buget :==: mic
+pret ^ redus
+}.
+
+R > 33
+buget :==: mediu
+pret ^ mediu
+}.
+
+R > 34
+buget :==: mare
+pret ^ mare
+}.
+
+R > 35
+\\sanatos
+gafait
+\\durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mediu
+}.
+
+R > 36
+sanatos
+\\gafait
+\\durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mare
+}.
+
+R > 37
+\\sanatos
+\\gafait
+\\durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mediu
+}.
+
+R > 38
+sanatos
+gafait
+\\durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mediu
+}.
+
+R > 39
+sanatos
+gafait
+durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mic
+}.
+
+R > 40
+\\sanatos
+gafait
+durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mic
+}.
+
+R > 41
+sanatos
+\\gafait
+durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mic
+}.
+
+R > 42
+\\sanatos
+\\gafait
+durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mic
+}.
+
+R > 43
+sanatos
+gafait
+\\durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mediu
+}.
+
+R > 44
+\\sanatos
+gafait
+\\durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mic
+}.
+
+R > 45
+sanatos
+\\gafait
+\\durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mare
+}.
+
+R > 46
+\\sanatos
+\\gafait
+\\durere_articulatii
+ore_sport :==: una
+efort_fizic ^ mic
+}.
+
+R > 47
+sanatos
+gafait
+durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mic
+}.
+
+R > 48
+\\sanatos
+gafait
+durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mic
+}.
+
+R > 49
+sanatos
+\\gafait
+durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mic
+}.
+
+R > 50
+\\sanatos
+\\gafait
+durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mic
+}.
+
+R > 51
+sanatos
+gafait
+\\durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mediu
+}.
+
+R > 52
+\\sanatos
+gafait
+\\durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mic
+}.
+
+R > 53
+sanatos
+\\gafait
+\\durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mare
+}.
+
+R > 54
+\\sanatos
+\\gafait
+\\durere_articulatii
+ore_sport :==: doua
+efort_fizic ^ mic
+}.
+
+R > 55
+sanatos
+gafait
+durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mic
+}.
+
+R > 56
+\\sanatos
+gafait
+durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mic
+}.
+
+R > 57
+sanatos
+\\gafait
+durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mic
+}.
+
+R > 58
+\\sanatos
+\\gafait
+durere_articulatii
+ore_sport :==: multe
+efort_fizic ^ mediu
+}.
+
+R > 59
+experienta :==: mica
+dificultate :==: mica
+mentenanta :==: mica
+pret :==: mediu
+adult
+mod_rulare :==: iarba
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ bicicleta :: fact_cert ^ 95
+}.
+
+R > 60
+experienta :==: mica
+dificultate :==: mica
+mentenanta :==: mica
+pret :==: mic
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mic
+forta_fizica
+vehicul ^ patine :: fact_cert ^ 95
+}.
+
+R > 61
+experienta :==: mica
+dificultate :==: mica
+mentenanta :==: mica
+pret :==: mediu
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ patine :: fact_cert ^ 95
+}.
+
+R > 62
+experienta :==: mica
+dificultate :==: mica
+mentenanta :==: mica
+pret :==: mic
+adult
+mod_rulare :==: asfalt
+efort_fizic :==: mediu
+forta_fizica
+vehicul ^ patine :: fact_cert ^ 95
+}.
+
+R > 63
+adult
+vehicul ^ trotineta :: fact_cert ^ 99
+}.
+
+intrebare > a_mai_folosit
+text ^ 'Ati mai folosit mijloace de transport in parc?' opt { da ^ nu }
+}.
+
+intrebare > miscare
+text ^ 'Iti place sa faci miscare?' opt { da ^ nu }
+}.
+
+intrebare > echilibru
+text ^ 'Care este gradul tau de echilibru?' opt { mic ^ ok ^ bun }
+}.
+
+intrebare > timp_liber
+text ^ 'Cat timp liber doriti sa alocati pentru mentenanta vehiculului?' opt { deloc ^ putin ^ mult }
+}.
+
+intrebare > priceput
+text ^ 'Va pricepeti la repararea vehiculelor?' opt { da ^ nu }
+}.
+
+intrebare > buget
+text ^ 'De ce buget dispuneti?' opt { mic ^ mediu ^ mare }
+}.
+
+intrebare > adult
+text ^ 'Aveti peste 6 ani?' opt { da ^ nu }
+}.
+
+intrebare > mod_rulare
+text ^ 'Pe unde vreti sa folositi vehiculul?' opt { iarba ^ asfalt }
+}.
+
+intrebare > sanatos
+text ^ 'Va simtiti sanatos?' opt { da ^ nu }
+}.
+
+intrebare > gafait
+text ^ 'Gafaiti dupa ce faceti miscare?' opt { da ^ nu }
+}.
+
+intrebare > durere_articulatii
+text ^ 'Va dor articulatiile sau genunchi?' opt { da ^ nu }
+}.
+
+intrebare > ore_sport
+text ^ 'Cate ore de sport puteti face pe zi?' opt { una ^ doua ^ multe }
+}.
+
+intrebare > forta_fizica
+text ^ 'Doriti sa mergeti pe vehicul folosindu-va forta fizica?' opt { da ^ nu }
 }.
