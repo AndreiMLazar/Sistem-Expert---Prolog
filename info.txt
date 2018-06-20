@@ -4,4 +4,105 @@ pasi:
 (1)<'Asezati-va pe platforma si puneti mainile pe ghidon.'>
 (2)<'Propulsati-va cu unul dintre picioare.'>
 imagine<'imagini/trotineta.jpg'>
-*****
+
+vehicul:<role> 
+descriere<'Rolele sunt încălțări care au atașate mici roți, care le permit purtătorului să se deplaseze pe un drum neted.'>
+pasi:
+(1)<'Puneti-va rolele in picioare.'>
+(2)<'Propulsati-va prin miscarea continua a picioarelor.'>
+imagine<'imagini/role.jpg'>
+
+vehicul:<skateboard> 
+descriere<'Un skateboard este un tip de echipament sportiv utilizat în principal pentru sportul de skateboarding. Acesta este alcătuit dintr-o placă de lemn din carton specială, care are atasata 2 perechi de roti.'>
+pasi:
+(1)<'Asezati-va pe placa in picioare.'>
+(2)<'Propulsati-va cu unul dintre picioare în timp ce celălalt rămâne pe placă.'>
+imagine<'imagini/skateboard.jpg'>
+
+vehicul:<longboard> 
+descriere<'Un longboard este alcătuit dintr-o placă de lemn din carton specială, care are atasata 2 perechi de roti.Un skateboard mai lung si mai stabil.'>
+pasi:
+(1)<'Asezati-va pe placa in picioare.'>
+(2)<'Propulsati-va cu unul dintre picioare în timp ce celălalt rămâne pe placă.'>
+imagine<'imagini/longboard.jpg'>
+
+vehicul:<waveboard> 
+descriere<'Asemanator cu skateboard-ul, waveboard-ul are două platforme înguste, cunoscute sub denumirea de "punți" care sunt îmbinate printr-o "bară de torsiune". Detine doar doua roti.'>
+pasi:
+(1)<'Asezati-va pe placa cu ambele picioare.'>
+(2)<'Propulsati-va prin miscarea alternativa fata-spate a picioarelor.'>
+imagine<'imagini/waveboard.jpg'>
+
+vehicul:<patine_cu_rotile> 
+descriere<'Patinele cu rotile sunt încălțări care au atașate mici roți, care le permit purtătorului să se deplaseze pe un drum neted.'>
+pasi:
+(1)<'Puneti-va patinele in picioare.'>
+(2)<'Propulsati-va prin miscarea continua a picioarelor.'>
+imagine<'imagini/patine_cu_rotile.jpg'>
+
+vehicul:<hoverboard> 
+descriere<'Hoverboard-ul sau SCOOTER-ul ELECTRIC ADS este dotat cu senzori ce detecteaza miscarile astfel incat dispozitivul se deplaseaza in directiile corespunzatoare.'>
+pasi:
+(1)<'Asezati-va pe placa cu ambele picioare.'>
+(2)<'Propulsati-va prin miscarea corpului in directia de mers.'>
+imagine<'imagini/hoverboard.jpg'>
+
+vehicul:<segway_o_roata> 
+descriere<'Segway este o bicicleta speciala electrica cu auto-echilibru. Segway/ pe o roata este constituit din doua mici platforme joase, pe de-o parte si de alta a unei roti cu un sistem electric special, pe care persoana sta in picioare.'>
+pasi:
+(1)<'Asezati-va pe platforme cu ambele picioare.'>
+(2)<'Propulsati-va prin miscarea corpului in directia de mers.'>
+imagine<'imagini/segway_o_roata.jpg'>
+
+vehicul:<segway_doua_roti> 
+descriere<'Segway este o bicicleta speciala electrica cu auto-echilibru.Segway este constituit dintr-o mică platformă joasă pe care te urci, avînd în dreapta și în stânga câte o roată de mărime mijlocie, și în mijloc un ghidon (tijă) subțire și înalt ca de trotinetă, cu mânere.'>
+pasi:
+(1)<'Asezati-va pe platforma si puneti mainile pe ghidon.'>
+(2)<'Propulsati-va prin miscarea corpului in directia de mers.'>
+imagine<'imagini/segway_doua_roti.jpg'>
+
+vehicul:<monociclu> 
+descriere<'Este un vehicul cu o singura roata, o șa si doua pedale, folosit in special de acrobati in circuri.'>
+pasi:
+(1)<'Asezati-va pe sa.'>
+(2)<'Pedalati pentru a va misca.'>
+imagine<'imagini/monociclu.jpg'>
+
+vehicul:<bicicleta> 
+descriere<'Vehicul pentru o persoană cu două roți de diametre egale, mișcarea produsă de două pedale fiind transmisă printr-un lanț roții din spate.'>
+pasi:
+(1)<'Asezati-va pe bicicleta cu fundul pe sa si mainile pe ghidon.'>
+(2)<'Pedalati pentru a va misca.'>
+imagine<'imagini/bicicleta.jpg'>
+
+vehicul:<trotineta_2roti_spate> 
+descriere<'Trotineta este o platforma mica cu doua sau mai multe roti, dirijata cu ajutorul unui ghidon si propulsata de cel care o conduce prin impingerea cu piciorul a pamantului.'>
+pasi:
+(1)<'Asezati-va pe platforma si puneti mainile pe ghidon.'>
+(2)<'Propulsati-va cu unul dintre picioare.'>
+imagine<'imagini/trotineta_2roti_spate.jpg'>
+
+vehicul:<pogo_stick> 
+descriere<'Un stick pogo este un dispozitiv pentru a sări de pe sol într-o poziție în picioare, prin intermediul unui arc sau a unor noi tehnologii de înaltă performanță.'>
+pasi:
+(1)<'Asezati-va pe platforma si puneti mainile pe ghidon.'>
+(2)<'Sariti fara sa detasati mainile si picioarele.'>
+imagine<'imagini/pogo_stick.jpg'>
+
+vehicul:<cart_cu_pedale> 
+descriere<'Automobil de curse mic, cu caroseria și partea mecanică simplificate și viteza redusă; automobil de acest tip folosit de copii în unele jocuri sportive. Acest model dispune de propulsare prin pedale.'>
+pasi:
+(1)<'Asezati-va in vehicul cu mainile pe volan si picioarele pe pedale.'>
+(2)<'Pedalati pentru a va misca.'>
+(3)<'Schimbati directia de mers din volan.'>
+imagine<'imagini/cart_cu_pedale.jpg'>
+
+vehicul:<masinuta_copii> 
+descriere<'Vehicul electric cu patru roti, pentru copii, controlat de catre o alta persoana dintr-o telecomanda.'>
+pasi:
+(1)<'Asezati copilul in vehicul.'>
+(2)<'Controlati masinuta de la distanta prin intermediul unei telecomenzi.'>
+imagine<'imagini/masinuta_copii.jpg'>
+
+
+
